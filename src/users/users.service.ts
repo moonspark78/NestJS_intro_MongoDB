@@ -13,7 +13,11 @@ export class UserService {
     return newUser.save();
   }
 
-  getUsers() {
+  getsUsers() {
     return this.userModel.find();
+  }
+
+  getUsersById(id: string) {
+    return this.userModel.findById(id);
   }
 }
