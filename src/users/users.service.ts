@@ -23,6 +23,6 @@ export class UserService {
   }
 
   updateUser(id: string, updateUserDto: UpdateUserDto) {
-    this.userModel.findByIdAndUpdate(id, updateUserDto);
+    return this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
   }
 }
