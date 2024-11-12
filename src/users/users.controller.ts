@@ -54,8 +54,11 @@ export class UsersController {
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string) {
+  async deleteUser(@Param('id') id: string) {
     const isValid = mongoose.Types.ObjectId.isValid(id);
     if (!isValid) throw new HttpException('Id is not Valid', 404);
+    const deleteUser = await this.usersService.deleteUser(id);
+    if (!deleteUser) throw new HttpException('User not Found', 404);
+    return;
   }
 }
