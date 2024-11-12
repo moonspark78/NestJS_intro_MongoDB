@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   Param,
@@ -50,5 +51,11 @@ export class UsersController {
     const updateUser = await this.usersService.updateUser(id, updateUserDto);
     if (!updateUser) throw new HttpException('User not found', 404);
     return updateUser;
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    const isValid = mongoose.Types.ObjectId.isValid(id);
+    if (!isValid) throw new HttpException('Id is not Valid', 404);
   }
 }
